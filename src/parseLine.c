@@ -26,10 +26,10 @@ void parseLine(char *line, customerParty *newCustomer, meal **menu) {
     int mealnumber = 0;
     while (token != NULL) {
        // printf(" %s\n", token); //printing each token
-        token = strtok(NULL, " ");
+
         if(token == NULL) break;
         if (counter == 0) {
-            newCustomer->name = malloc(sizeof(char) * (strlen(token)+1);
+            newCustomer->name = malloc(sizeof(char) * (strlen(token)+1));
             strncpy(newCustomer->name, token,strlen(token));
         }
         else if(counter==1)
@@ -38,12 +38,12 @@ void parseLine(char *line, customerParty *newCustomer, meal **menu) {
         }
         else if(counter == 2){
             newCustomer->groupSize = atoi(token);
-            newCustomer->order = (meal *) malloc(sizeof(meal));
+            newCustomer->order = (meal *) malloc(newCustomer->groupSize*sizeof(meal));
         }
         else{
             //printf("---------------Token--------------%s\r\n",token);
             //printf("!!!%s!!!\r\n",menu[atoi(token)]->name);
-            newCustomer->order = (meal *)realloc(newCustomer->order,++mealnumber*sizeof(meal));
+            //newCustomer->order = (meal *)realloc(newCustomer->order,++mealnumber*sizeof(meal));
             newCustomer->order->name = calloc(sizeof(char),strlen(menu[atoi(token)]->name));
             strncpy(newCustomer->order->name,menu[atoi(token)]->name,strlen(menu[atoi(token)]->name));
             newCustomer->order->price = menu[atoi(token)]->price;
@@ -52,6 +52,7 @@ void parseLine(char *line, customerParty *newCustomer, meal **menu) {
         }
         counter++;
         
+        token = strtok(NULL, " ");
     }
     //fprintf("The line is: %s\n", line);
 

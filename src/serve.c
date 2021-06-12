@@ -12,13 +12,13 @@
 
 int serveCustomer(customerParty *customer, restaurant *res) {
     int stage = customer->currentStage;
-    int k = 0;
+    //int k = 0;
     //printf("%d\r\n",res->tableCount);
     
     if (stage == ARRIVED) {
         /* ------------ hier code einfügen ------------ */
         for(int i = 0;i<res->tableCount;i++){
-           if(res->tables[i] ==NULL) {res->tables[i] = customer;customer->tableID = i;k = i;return 0;}
+           if(res->tables[i] ==NULL) {res->tables[i] = customer;customer->tableID = i;return 0;}
         }
         return -1;
 
@@ -37,7 +37,7 @@ int serveCustomer(customerParty *customer, restaurant *res) {
         if(p<0) p = 0;
         if(p>20) p = 20;
         p = p/100;
-        printf("\r\n%f\r\n",p);
+       // printf("\r\n%f\r\n",p);
         for(int i = 0;i<customer->groupSize;i++){
             customer->bill+=customer->order[i].price;
             res->sales+=customer->order[i].price;

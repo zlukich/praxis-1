@@ -16,7 +16,9 @@ int getPrepTime(meal* order, int orderSize){
     for (int i = 0; i < orderSize; i++)
     {
         if (max < order[i].prepTime) max = order[i].prepTime;
+        //if(max==0) printf("Something Wrong\r\n");
     }
+    
     return max;
     
 
@@ -45,12 +47,14 @@ customerParty *cooking_queue_next_HRRN(restaurant *res, int currentTime) {
         if(res->tables[i]->stamps[4]==0) continue;
         if(res->tables[i]->stamps[5]!=0) continue;
         //printf("!!!!!!!!!!!!!!   %d    !!!!!!!!!!!!!!!!!!!!",res->tables[i]->stamps[4]);
-        double d = (currentTime - res->tables[i]->stamps[4] + getPrepTime(res->tables[i]->order, res->tables[i]->groupSize)) / getPrepTime(res->tables[i]->order, res->tables[i]->groupSize);
+        if(getPrepTime(res->tables[i]->order, res->tables[i]->groupSize)==0) {continue; break;}
+        float d = (currentTime - res->tables[i]->stamps[4] + getPrepTime(res->tables[i]->order, res->tables[i]->groupSize)) / getPrepTime(res->tables[i]->order, res->tables[i]->groupSize);
         if(d>max) {max = d;k = i;}
         //if(party->stamp[1] vergleichen)
         
     }
     if(max!=-1) party = res->tables[k];
+    //sleep(1);
     return party;
     
 
