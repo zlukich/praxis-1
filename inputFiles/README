@@ -1,0 +1,8 @@
+Input files follow the following pattern:
+
+NameGroup1 ArrivalTimeGroup1 SizeGroup1 Meal1, ... , Meal_SizeGroup1
+NameGroup2 ArrivalTimeGroup2 SizeGroup2 Meal2, ... , Meal_SizeGroup2
+NameGroup3 ArrivalTimeGroup3 SizeGroup3 Meal3, ... , Meal_SizeGroup3
+
+etc...
+
