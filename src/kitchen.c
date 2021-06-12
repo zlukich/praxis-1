@@ -11,14 +11,14 @@
  */
 
 int getPrepTime(meal* order, int orderSize){
-    /* ------------ hier code einfügen ------------ 
+    /* ------------ hier code einfügen ------------*/ 
     int max = -1;
     for (int i = 0; i < orderSize; i++)
     {
-        if (max < meal[i].prepTime) max = meal[i].prepTime;
+        if (max < order[i].prepTime) max = order[i].prepTime;
     }
     return max;
-    */
+    
 
     
     /* ---------- bis hier code einfügen ---------- */
@@ -36,14 +36,23 @@ int getPrepTime(meal* order, int orderSize){
 
 customerParty *cooking_queue_next_HRRN(restaurant *res, int currentTime) { 
     /* ------------ hier code einfügen ------------ */
-    /*CustomerParty* party = NULL;
-    foreach(*table in * res){
-        double d = (currentTime - stamp[4] + getPrepTime(*table->meal, *table.groupSize)) / getPrepTime(*table->meal, *table.groupSize);
+    customerParty* party = NULL;
+    int max = -1;
+    int k = 0;
+    //printf("\r\n Test  %d  \r\n",res->tables[0]->stamps[4])
+    for(int i = 0;i<res->tableCount;i++){
+        if(res->tables[i] == NULL) continue;
+        if(res->tables[i]->stamps[4]==0) continue;
+        if(res->tables[i]->stamps[5]!=0) continue;
+        //printf("!!!!!!!!!!!!!!   %d    !!!!!!!!!!!!!!!!!!!!",res->tables[i]->stamps[4]);
+        double d = (currentTime - res->tables[i]->stamps[4] + getPrepTime(res->tables[i]->order, res->tables[i]->groupSize)) / getPrepTime(res->tables[i]->order, res->tables[i]->groupSize);
+        if(d>max) {max = d;k = i;}
         //if(party->stamp[1] vergleichen)
-        party = *res->tables[i];
+        
     }
+    if(max!=-1) party = res->tables[k];
     return party;
-    */
+    
 
 
 
