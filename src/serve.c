@@ -13,7 +13,7 @@
 int serveCustomer(customerParty *customer, restaurant *res) {
     int stage = customer->currentStage;
     int k = 0;
-    printf("%d\r\n",res->tableCount);
+    //printf("%d\r\n",res->tableCount);
     
     if (stage == ARRIVED) {
         /* ------------ hier code einfügen ------------ */
@@ -29,16 +29,30 @@ int serveCustomer(customerParty *customer, restaurant *res) {
     if (stage == DECIDED) {
         return 0;
     } //ORDER
-    if (stage == EATEN) {
+    if (stage == EATEN) 
+    {
         /* ------------ hier code einfügen ------------ */
-        int W = customer->stamps[2] - customer->stamps[1] + customer->stamps[4] - customer->stamps[3] + customer->stamps[6] - customer->stamps[5];
-        int p = 20 - (0.5*(W-5));
+        float W = customer->stamps[2] - customer->stamps[1] + customer->stamps[4] - customer->stamps[3] + customer->stamps[6] - customer->stamps[5];
+        float p = 20 - (0.5*(W-5));
         if(p<0) p = 0;
         if(p>20) p = 20;
-        res->tables[k] = NULL;
-
-        
+        p = p/100;
+        printf("\r\n%f\r\n",p);
+        for(int i = 0;i<customer->groupSize;i++){
+            customer->bill+=customer->order[i].price;
+            res->sales+=customer->order[i].price;
+            customer->tip+=customer->order[i].price*p;
+            res->tips+=customer->order[i].price*p;
+        }
+        for(int i = 0;i<res->tableCount;i++)
+        {
+            if(customer == res->tables[i]) 
+            {
+                res->tables[i] = NULL; break;
+            }
+        }
+        return 0;   
         /* ---------- bis hier code einfügen ---------- */
-    } //PAY
-    return -1;
+    }
+    
 }
